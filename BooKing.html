@@ -130,9 +130,9 @@
         required
       /><br />
       <span id="passengersError" class="error"></span><br />
-
-      <button onclick="adduser()" type="button">
-        ADDed Susuceefully
+      
+      <button id="submitButton" onclick="adduser()" type="button" disabled>
+        ADDed Successfully
       </button>
     </form>
 
@@ -143,65 +143,68 @@
       }
 
       function validateForm() {
-        var name = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
-        var departure = document.getElementById("departure").value;
-        var destination = document.getElementById("destination").value;
-        var date = document.getElementById("date").value;
-        var passengers = document.getElementById("passengers").value;
+  var name = document.getElementById("name").value;
+  var email = document.getElementById("email").value;
+  var departure = document.getElementById("departure").value;
+  var destination = document.getElementById("destination").value;
+  var date = document.getElementById("date").value;
+  var passengers = document.getElementById("passengers").value;
 
-        var isValid = true;
+  var isValid = true;
 
-        if (name === "") {
-          document.getElementById("nameError").textContent =
-            "Please enter your name";
-          isValid = false;
-        } else {
-          document.getElementById("nameError").textContent = "";
-        }
+  if (name === "") {
+    document.getElementById("nameError").textContent =
+      "Please enter your name ";
+    isValid = false;
+  } else {
+    document.getElementById("nameError").textContent = "";
+  }
 
-        if (email === "") {
-          document.getElementById("emailError").textContent =
-            "Please enter your email";
-          isValid = false;
-        } else {
-          document.getElementById("emailError").textContent = "";
-        }
+  var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailPattern.test(email)) {
+  document.getElementById("emailError").textContent = "Please enter a valid email";
+  isValid = false;
+} else {
+  document.getElementById("emailError").textContent = "";
+}
 
-        if (departure === "") {
-          document.getElementById("departureError").textContent =
-            "Please enter departure city";
-          isValid = false;
-        } else {
-          document.getElementById("departureError").textContent = "";
-        }
+  if (departure === "") {
+    document.getElementById("departureError").textContent =
+      "Please enter departure city ";
+    isValid = false;
+  } else {
+    document.getElementById("departureError").textContent = "";
+  }
 
-        if (destination === "") {
-          document.getElementById("destinationError").textContent =
-            "Please enter destination city";
-          isValid = false;
-        } else {
-          document.getElementById("destinationError").textContent = "";
-        }
+  if (destination === "") {
+    document.getElementById("destinationError").textContent =
+      "Please enter destination ";
+    isValid = false;
+  } else {
+    document.getElementById("destinationError").textContent = "";
+  }
 
-        if (date === "") {
-          document.getElementById("dateError").textContent =
-            "Please select a date";
-          isValid = false;
-        } else {
-          document.getElementById("dateError").textContent = "";
-        }
+  if (date === "") {
+    document.getElementById("dateError").textContent =
+      "Please select a date";
+    isValid = false;
+  } else {
+    document.getElementById("dateError").textContent = "";
+  }
 
-        if (passengers === "" || passengers < 1 || passengers > 10) {
-          document.getElementById("passengersError").textContent =
-            "Please enter a valid number of passengers (1-10)";
-          isValid = false;
-        } else {
-          document.getElementById("passengersError").textContent = "";
-        }
+  if (passengers === "" || passengers < 1 || passengers > 10) {
+    document.getElementById("passengersError").textContent =
+      "Please enter a valid number of passengers (1-10)";
+    isValid = false;
+  } else {
+    document.getElementById("passengersError").textContent = "";
+  }
 
-        return isValid;
-      }
+  // Enable or disable the button based on validity
+  document.getElementById("submitButton").disabled = !isValid;
+
+  return isValid;
+}
       function adduser() {
         person = {
           name: "",
